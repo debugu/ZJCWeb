@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>政教处信息管理系统</title>
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#btnOk").click(function () {
+                if ($("#txtUserName").val() == "" || $("#txtPassword").val() == "") {
+                    $("#msgTd").text("必须填写用户名和密码");
+                    return false;
+                } else {
+                    var val = $('input:radio[name="userGroup"]:checked').val();
+                    if (val=="Teacher")
+                    {
+                        $.ajax({
+                            type:"POST",
+                            url:"Teacher/Login.ashx",
+                            data: "UserName=" + $("#txtUserName").val() + "&Password=" + $("#txtPassword").val(),
+                            success: function (data) {
+                                var result = data.split(":");
+                                switch (result[0]) {
+                                    case "admin":
+                                        location.href = "Admin/Main.html";
+                                        break;
+                                    case "teacher":
+                                        location.href = "Teacher/Main.html";
+                                        break;
+                                    default:
+                                        $("#msgTd").text("用户名或密码错误");
+                                        return false;
+                                }
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            type: "post",
+                            url: "Student/Login.ashx",
+                            data: "UserName=" + $("#txtUserName").val() + "&Password=" + $("#txtPassword").val(),
+                            sucess: function (data) {
+                                switch (data) {
+                                    case "error":
+                                        $("#msgTd").text("用户名或密码错误");
+                                        return false;
+                                    default:
+                                        location.href = "Student/Main.html";
+                                        break;
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body  background="/images/bg2.gif">
+    <div style="height:80px"></div>
+<div align="center" style="font-size:60px">政教处信息管理系统</div>
+    <br /><br /><br /><br />
+    <div align="center">
+        <table border="0" width="250px">
+            <tr>
+                <td>
+                    用户名：<input type="text" id="txtUserName" style="width:150px"/>
+                </td>
+            </tr>
+            <tr height="15"><td></td></tr>                                          
+            <tr>
+                <td>密&ensp;&ensp;码：<input type="password" id="txtPassword" style="width:150px"/></td></tr>
+            <tr height="15"><td></td></tr>  
+            <tr>
+                <td align="center"><input type="radio" checked="checked" value="Teacher" id="rdTeacher" name="userGroup"/>教师
+                <input type="radio" value="Student" id="rdStudent" name="userGroup"/>学生
+                </td>
+            </tr>
+            <tr height="15"><td></td></tr> 
+            <tr>
+                <td align="center">
+                    <input type="button" id="btnOk" value="确定"/>
+                </td>
+            </tr>
+            <tr><td id="msgTd" style="color:red;font-size:12px;"></td></tr>
+        </table>
+    </div>
+</body>
+</html>"

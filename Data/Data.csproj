@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{66EE9497-59D9-4B6F-9055-9F1661CAF225}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Data</RootNamespace>
+    <AssemblyName>Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\T_BoarderInfo_BLL.cs" />
+    <Compile Include="BLL\T_BoarderInfo_BLL_Ext.cs" />
+    <Compile Include="BLL\T_Class_BLL.cs" />
+    <Compile Include="BLL\T_Class_BLL_Ext.cs" />
+    <Compile Include="BLL\T_ExternInfo_BLL.cs" />
+    <Compile Include="BLL\T_ExternInfo_BLL_Ext.cs" />
+    <Compile Include="BLL\T_PunishRecord_BLL.cs" />
+    <Compile Include="BLL\T_PunishRecord_BLL_Ext.cs" />
+    <Compile Include="BLL\T_StuClass_BLL.cs" />
+    <Compile Include="BLL\T_StuClass_BLL_Ext.cs" />
+    <Compile Include="BLL\T_StudentInfo_BLL.cs" />
+    <Compile Include="BLL\T_StudentInfo_BLL_Ext.cs" />
+    <Compile Include="BLL\T_StuRelationship_BLL.cs" />
+    <Compile Include="BLL\T_StuRelationship_BLL_Ext.cs" />
+    <Compile Include="BLL\T_TeacherInfo_BLL.cs" />
+    <Compile Include="BLL\T_TeacherInfo_BLL_Ext.cs" />
+    <Compile Include="BLL\T_TenantInfo_BLL.cs" />
+    <Compile Include="BLL\T_TenantInfo_BLL_Ext.cs" />
+    <Compile Include="DAL\SqlHelper.cs" />
+    <Compile Include="DAL\T_BoarderInfo_DAL.cs" />
+    <Compile Include="DAL\T_BoarderInfo_DAL_Ext.cs" />
+    <Compile Include="DAL\T_Class_DAL.cs" />
+    <Compile Include="DAL\T_Class_DAL_Ext.cs" />
+    <Compile Include="DAL\T_ExternInfo_DAL.cs" />
+    <Compile Include="DAL\T_ExternInfo_DAL_Ext.cs" />
+    <Compile Include="DAL\T_PunishRecord_DAL.cs" />
+    <Compile Include="DAL\T_PunishRecord_DAL_Ext.cs" />
+    <Compile Include="DAL\T_StuClass_DAL.cs" />
+    <Compile Include="DAL\T_StuClass_DAL_Ext.cs" />
+    <Compile Include="DAL\T_StudentInfo_DAL.cs" />
+    <Compile Include="DAL\T_StudentInfo_DAL_Ext.cs" />
+    <Compile Include="DAL\T_StuRelationship_DAL.cs" />
+    <Compile Include="DAL\T_StuRelationship_DAL_Ext.cs" />
+    <Compile Include="DAL\T_TeacherInfo_DAL.cs" />
+    <Compile Include="DAL\T_TeacherInfo_DAL_Ext.cs" />
+    <Compile Include="DAL\T_TenantInfo_DAL.cs" />
+    <Compile Include="DAL\T_TenantInfo_DAL_Ext.cs" />
+    <Compile Include="Model\T_BoarderInfo_Model.cs" />
+    <Compile Include="Model\T_Class_Model.cs" />
+    <Compile Include="Model\T_ExternInfo_Model.cs" />
+    <Compile Include="Model\T_PunishRecord_Model.cs" />
+    <Compile Include="Model\T_StuClass_Model.cs" />
+    <Compile Include="Model\T_StudentInfo_Model.cs" />
+    <Compile Include="Model\T_StuRelationship_Model.cs" />
+    <Compile Include="Model\T_TeacherInfo_Model.cs" />
+    <Compile Include="Model\T_TenantInfo_Model.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

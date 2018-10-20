@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>猜数字</title>
+    <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    <link href="../css/manage.css" rel="stylesheet" />
+    <script>
+        $(function () {
+            loadGuessData();
+            $("#btnGuess").click(function () {
+                var guessData = $("#guessData").val().split(":");
+                var tip = $("#txtTip").text();
+                if (tip == "猜中了！") { return false; }
+                var myguessValue = parseInt($("#txtPrice").val());
+                if (!isNaN(myguessValue)) {
+                    if (myguessValue > guessData[0]) {
+                        $("#txtTip").text("大了。");
+                    } else {
+                        if (myguessValue < guessData[0]) {
+                            $("#txtTip").text("小了。");
+                        } else {
+                            $("#txtTip").text("猜中了！");
+                            var name = prompt("恭喜你，猜中了！为了记录你的成绩，请输入您的姓名：", "");
+                            while (name=="") {
+                                alert("姓名不能为空！");
+                                name = prompt("请输入您的姓名：", "");
+                            }
+                            var lun = parseInt($("#guessLun").val());
+                            lun = lun + 1;
+                            $("#guessLun").val(lun);
+                            $("#tbData").append("<tr><td>" + lun + "</td><td>" + myguessValue + "</td><td>" + $("#txtTip").text() + "</td></tr>");
+                            var guessresult = $("#guessResult").val();
+                            if (guessresult == "") {
+                                guessresult = myguessValue;
+                            } else {
+                                guessresult = guessresult + "," + myguessValue;
+                            }
+                            $("#guessResult").val(guessresult);
+                            $.post("erfenPutGuessResult.ashx", { "Lun": guessData[1], "guessResult": guessresult,"Name":name }, function (data) {
+                            });
+                            $("#tbData").append("<a href='pm.html?lun="+guessData[1]+"'>查看排名</a>");
+                            return false;
+                        }
+                    }
+                    var lun = parseInt($("#guessLun").val());
+                    lun = lun + 1;
+                    $("#guessLun").val(lun);
+                    $("#tbData").append("<tr><td>" + lun + "</td><td>" + myguessValue + "</td><td>" + $("#txtTip").text() + "</td></tr>");
+                    var guessresult = $("#guessResult").val();
+                    if (guessresult == "") {
+                        guessresult = myguessValue;
+                    } else {
+                        guessresult = guessresult + "," + myguessValue;
+                    }
+                    $("#guessResult").val(guessresult);
+                    return false;
+                } else {
+                    $("#txtTip").text("必须输入数字。");
+                }
+            });
+        })
+        function loadGuessData() {
+            $.post("ErFenGetGuessData.ashx", {}, function (data) {
+                $("#guessData").attr("value", data);
+                var guessData = $("#guessData").val().split(":");
+                if (guessData[2] == "1") {
+                    $("#txtList").text("待猜测的数据集合为："+guessData[3]);
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div id="divContent">
+        <input id="guessData" type="hidden" />
+        <input id="guessLun" value="0" type="hidden" />
+        <input id="guessResult" value="" type="hidden" />
+        <br />
+        <div align="center" style="font-size:40px">
+            猜数字
+        </div>
+        <br />
+        <div align="center">
+            请输入你猜测的数字：<input type="text" id="txtPrice" />
+            <input type="button" id="btnGuess" value="我猜" /><br /><br />
+            <span id="txtTip" style="color:red">准备猜测</span><br /><br />
+            <span id="txtList" style="color:red"></span>
+        </div>
+        <p></p>
+        <br />
+        <table id="tbData">
+            <tr>
+                <th align='center'>轮次</th>
+                <th align='center'>猜测数值</th>
+                <th align='center'>状态</th>
+        </table>
+        <div id="divToPM"></div>
+    </div>
+</body>
+</html>

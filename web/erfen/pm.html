@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    <link href="../css/manage.css" rel="stylesheet" />
+    <title>查看排名</title>
+    <script>
+        $(function () {   
+            var para = GetPara();
+            $.get("erfenList.ashx" + para, {}, function (data) {
+                var gs = $.parseJSON(data);
+                for (var i = 0; i < gs.length; i++) {                   
+                    $("<tr><td>" + (i+1).toString() + "</td><td>" + gs[i].StuName + "</td><td>" + gs[i].GuessNumber + "</td><td>" + gs[i].GuessPath + "</td></tr>").appendTo("#tbData");
+                }
+            });
+            setInterval(refresh, 5000);
+            function refresh() {
+                $.get("erfenList.ashx" + para, {}, function (data) {
+                    var gs = $.parseJSON(data);
+                    $("#tbData tr:not(:first)").remove("tr"); 
+                    for (var i = 0; i < gs.length; i++) {
+                        $("<tr><td>" + (i + 1).toString() + "</td><td>" + gs[i].StuName + "</td><td>" + gs[i].GuessNumber + "</td><td>" + gs[i].GuessPath + "</td></tr>").appendTo("#tbData");
+                    }
+                })
+            }
+            $("#btnAnther").click(function () {
+                $.post("ErFenGetGuessData.ashx", {}, function (data) {
+                    var guessData = data.split(":");
+                    var p = para.split("=");
+                    if (guessData[1] == p[1]) {
+                        alert("下一轮尚未开始，请稍候！");
+                    }
+                    else {
+                        window.location.href = "guess.html";                        
+                    }
+                })
+            })
+        });
+        function GetPara() {
+            /* 用途: 接收地直栏参数 取id=1 根据ID的值 */
+            var urlinfo = window.location.href; //获取当前页面的url
+            var len = urlinfo.length;//获取url的长度
+            var offset = urlinfo.indexOf("?");//设置参数字符串开始的位置
+            var newsidinfo = urlinfo.substr(offset, len)//取出参数字符串 这里会获得类似“id=1”这样的字符串
+            return newsidinfo;//得到参数值
+        }
+    </script>
+</head>
+<body>
+    <div id="divContent">
+        <br />
+        <div align="center" style="font-size:40px">
+            猜测结果排名榜
+        </div>
+        <br />
+        <br />
+        <table id="tbData">
+            <tr><th align='center'>名次</th>
+                <th align='center'>姓名</th>
+                <th align='center'>猜测步数</th>
+                <th align='center'>猜测过程</th></tr>
+</table>
+        <br /><br />
+        <div id="divToPM" align="center">
+            <a href="javascript:void(0)" id="btnAnther">再来一轮</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -8,7 +8,7 @@ namespace Data
 {
     class SqlHelper
     {
-        public static string connstr ="Data Source=10.89.23.100;Initial Catalog=Zjc;User ID=sa;Password=Class?1;";
+        public static string connstr ="Data Source=192.168.0.100;Initial Catalog=Zjc;User ID=sa;Password=Class?1;";
         public static int ExecuteNonQuery(string sqlstr, params SqlParameter[] parameter)
         {
              using (SqlConnection conn = new SqlConnection(connstr))

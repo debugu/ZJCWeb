@@ -66,13 +66,24 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\erfen.html" />
     <Content Include="Admin\ResetPassword.ashx" />
     <Content Include="Admin\GetTeacherList.ashx" />
+    <Content Include="erfen\ErFenGetGuessData.ashx" />
+    <Content Include="erfen\erfenPutGuessResult.ashx" />
+    <Content Include="erfen\erfenList.ashx" />
+    <Content Include="erfen\erfenSetNumber.ashx" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Admin\Main.html" />
     <Content Include="Admin\Teacher.html" />
     <Content Include="css\manage.css" />
+    <Content Include="erfen\guess.html" />
+    <Content Include="erfen\login.html" />
+    <Content Include="erfen\pm.html" />
+    <Content Include="erfen\二分查找实现一.html" />
+    <Content Include="erfen\二分查找实现二.html" />
     <Content Include="images\bg.jpg" />
     <Content Include="images\bg1.gif" />
     <Content Include="images\bg2.gif" />
@@ -109,6 +120,18 @@
     </Compile>
     <Compile Include="Admin\ResetPassword.ashx.cs">
       <DependentUpon>ResetPassword.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="erfen\ErFenGetGuessData.ashx.cs">
+      <DependentUpon>ErFenGetGuessData.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="erfen\erfenList.ashx.cs">
+      <DependentUpon>erfenList.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="erfen\erfenPutGuessResult.ashx.cs">
+      <DependentUpon>erfenPutGuessResult.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="erfen\erfenSetNumber.ashx.cs">
+      <DependentUpon>erfenSetNumber.ashx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student\Login.ashx.cs">

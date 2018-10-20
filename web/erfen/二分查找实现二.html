@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+        var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 23, 44, 86];
+        var guesspath="";//用来记录查找的过程
+        var key=33;//待查找的数
+        var low = 0,high = arr.length - 1;//设定查找数列范围，这两个数字指的是最小数的位置和最大数的位置
+        while (low <= high) {//继续查找的条件是最小数比最大数小，如果最小数比最大数还大，则结束查找。
+            var mid = parseInt((high + low) / 2);//找到中间数的位置
+            if (key == arr[mid]) {//如果中间数等于要查找的数
+                guesspath = recordPath(guesspath,key);
+                alert("找到了。猜测过程为" + guesspath);//找到要查找的数，显示查找的过程
+                break;//找到了，不再查找
+            } else if (key > arr[mid]) {//如果中间数大于要查找的数
+                guesspath = recordPath(guesspath, arr[mid]);
+                low = mid + 1;//改变查找范围的最小值
+            } else if (key < arr[mid]) {//如果中间数小于要查找的数
+                guesspath = recordPath(guesspath, arr[mid]);
+                high = mid - 1;//改变查找范围的最大值
+            }
+        }
+        if (low > high) {//如果结束查找时最小数比最大数还大，说明没有找到，弹出提示。
+            alert("在当前数列中没有发现要找的数。猜测过程为" + guesspath);
+        }
+
+        //记录查找的历史记录
+        function recordPath(oldpath, nowguessnumber) {
+            if (oldpath == "") {
+                return nowguessnumber;
+            } else {
+                return oldpath + "," + nowguessnumber;
+            }
+        }
+    </script>
+</body>
+</html>

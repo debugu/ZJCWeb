@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#btnSet").click(function () {
+                $.post("../erfen/erfenSetNumber.ashx", { "GuessStyle": $("#txtStyle").val(), "GuessList": $("#txtList").val(),"Lun": $("#txtLun").val(), "Number": $("#txtNumber").val()}, function () {
+                });
+            });
+            $("#btnListPm").click(function () {
+                var url = "../erfen/pm.html?lun=" + $("#txtLun").val();
+                window.location.href = url;
+            });
+            $("#btnListAllPm").click(function () {
+
+            });
+        })
+    </script>
+</head>
+<body>
+    <br />
+    待猜测数列：<input type="text" id="txtList">&nbsp;&nbsp;&nbsp;&nbsp;
+    猜测类型：<input type="text" value="0" id="txtStyle">&nbsp;&nbsp;&nbsp;&nbsp;轮次：<input type="text" id="txtLun">&nbsp;&nbsp;&nbsp;&nbsp;猜测的数值：<input type="text" id="txtNumber">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="设置猜测的数字" id="btnSet" /><br /><br /><br />
+    <input type="button" id="btnListPm" value="查看排名" /> <br /> <br />
+    <input type="button" id="btnListAllPm" value="查看总排名" />
+</body>
+</html>

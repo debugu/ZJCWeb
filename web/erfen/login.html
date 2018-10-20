@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>登陆</title>
+    <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#btnLogin").click(function () {
+                if ($("#txtName").val() == "") {
+                    alert("姓名不能为空");
+                    return false;
+                } else {
+                    window.location.href = "guess.html?name=" + $("#txtName").val();
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    请输入你的姓名：<input type="text" id="txtName"/><input type="button" id="btnLogin" value="登陆" />
+</body>
+</html>

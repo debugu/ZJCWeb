@@ -4,22 +4,41 @@
     <meta charset="utf-8" />
     <title></title>
     <link href="../css/manage.css" rel="stylesheet" />
+    <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#btnImport").click(function () {
+
+
+            });
+        })
+    </script>
 </head>
 <body background="/images/bg2.gif">
-    <div align="center" style="font-size:40px">学生信息管理</div>
+    <div align="center" style="font-size:40px">学生信息管理</div><br />
     <div style="display: flex;justify-content: center">
         <div style="width:170px;">
-        <ul>
-            <li><a href="javascript:void()" class="listu" id="btnBasicInfo">基本情况</a></li>
-            <li><a href="javascript:void()" class="listu" id="btnZSInfo">住宿信息</a></li>
-            <li><a href="javascript:void()" class="listu" id="btnWKInfo">五困生</a></li>
-            <li><a href="javascript:void()" class="listu" id="btnWLnfo">外来务工子女</a></li>
-            <li><a href="javascript:void()" class="listu" id="btnLSInfo">留守儿童</a></li>
-            <li><a href="javascript:void()" class="listu" id="btnSHInfo">三好学生</a></li>
-            <li><a href="javascript:void()" class="listu" id="btnYXInfo">优秀学生干部</a></li>
-        </ul>
+            <ul>
+                <li><a href="javascript:void()" class="listu" id="btnImport">数据导入</a></li>
+                <li><a href="javascript:void()" class="listu" id="btnBasicInfo">基本情况</a></li>
+                <li><a href="javascript:void()" class="listu" id="btnZSInfo">住宿信息</a></li>
+                <li><a href="javascript:void()" class="listu" id="btnWKInfo">五困生</a></li>
+                <li><a href="javascript:void()" class="listu" id="btnWLnfo">外来务工子女</a></li>
+                <li><a href="javascript:void()" class="listu" id="btnLSInfo">留守儿童</a></li>
+                <li><a href="javascript:void()" class="listu" id="btnSHInfo">三好学生</a></li>
+                <li><a href="javascript:void()" class="listu" id="btnYXInfo">优秀学生干部</a></li>
+            </ul>
         </div>
-        <div style="width:900px">bbbbbbbb</div>
+        <div style="width:900px">
+            <table border="1" height="505" background="/images/bg2.gif" bordercolorlight="#000000" bordercolordark="#000000">
+                <tr>
+                    <td align="left" >
+                        <font size="4">请点击数据导入，下载模板，填写完毕后导入系统，然后在各个子项中查看具体的数据。
+                        </font>
+</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </body>
 </html>

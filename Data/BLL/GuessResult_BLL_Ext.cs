@@ -13,5 +13,10 @@ namespace Data
         {
             return new GuessResultDAL().GetAll(lun);
         }
+
+        public int Delete()
+        {
+            return new GuessResultDAL().Delete();
+        }
     }
 }

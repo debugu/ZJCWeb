@@ -62,6 +62,8 @@
     <Compile Include="BLL\T_TeacherInfo_BLL_Ext.cs" />
     <Compile Include="BLL\T_TenantInfo_BLL.cs" />
     <Compile Include="BLL\T_TenantInfo_BLL_Ext.cs" />
+    <Compile Include="BLL\V_Class_BLL.cs" />
+    <Compile Include="BLL\V_Class_BLL_Ext.cs" />
     <Compile Include="DAL\GuessPara_DAL.cs" />
     <Compile Include="DAL\GuessPara_DAL_Ext.cs" />
     <Compile Include="DAL\GuessResult_DAL.cs" />
@@ -85,6 +87,8 @@
     <Compile Include="DAL\T_TeacherInfo_DAL_Ext.cs" />
     <Compile Include="DAL\T_TenantInfo_DAL.cs" />
     <Compile Include="DAL\T_TenantInfo_DAL_Ext.cs" />
+    <Compile Include="DAL\V_Class_DAL.cs" />
+    <Compile Include="DAL\V_Class_DAL_Ext.cs" />
     <Compile Include="Model\GuessPara_Model.cs" />
     <Compile Include="Model\GuessResult_Model.cs" />
     <Compile Include="Model\T_BoarderInfo_Model.cs" />
@@ -96,6 +100,7 @@
     <Compile Include="Model\T_StuRelationship_Model.cs" />
     <Compile Include="Model\T_TeacherInfo_Model.cs" />
     <Compile Include="Model\T_TenantInfo_Model.cs" />
+    <Compile Include="Model\V_Class_Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

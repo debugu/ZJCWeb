@@ -7,14 +7,36 @@
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
     <script>
         $(function () {
-            loadTeacherInfo();
-        })
-        function loadTeacherInfo() {
             $.post("GetTeacherList.ashx", {}, function (data) {
-                var teas = $.parseJSON(data);
-                for (var i = 0; i < teas.length; i++) {
-                    $("<tr><td>" + i.toString() + "</td></tr>")
-                }
+                loadTeacherInfo(data);
+            });
+            $("#upload").click(function () {
+                var formData = new FormData($('#uploadForm')[0]);
+                $.ajax({
+                    type: 'post',
+                    url: "ImportTeacherInfo.ashx",
+                    data: formData,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        loadTeacherInfo(data);
+                    },
+                    error: function () {
+                        alert("上传失败");
+                    }
+                });
+            }); 
+        })
+        function loadTeacherInfo(data) {
+            var teas = $.parseJSON(data);
+            for (var i = 0; i < teas.length; i++) {
+                $("<tr><td>" + i.toString() + "</td><td>" + teas[i].UserName + "</td><td>" + teas[i].Name + "</td><td>" + teas[i].TelYd + "</td><td>" + teas[i].TelDx + "</td><td>" + teas[i].TelLt + "</td><td>" + teas[i].TelGh + "</td><td>" + teas[i].EMail + "</td><td>" + teas[i].IDCardNO + "</td><td>" + teas[i].Mark + "</td><td>" + teas[i].Mark + "</td><td><a href='javascript:void(0);' onclick='resetpassword(\"" + teas[i].id + "\")'>重置密码</a></td></tr>").appendTo("#tbContent");
+            }
+        }
+        function resetpassword(id) {
+            $.get("ResetPassword.ashx", { id }, function (data) {
+                alert("密码重置为123456。");
             })
         }
     </script>
@@ -22,17 +44,16 @@
 <body background="/images/bg2.gif">
     <div align="center" style="font-size:40px">教师信息管理</div>
     <div style="display: flex;justify-content: center">
-        <div style="width:170px;">
-            <ul>
-                <li><a href="javascript:void()" class="listu" id="btnExport">导出模板</a></li>
-                <li><a href="javascript:void()" class="listu" id="btnImport">导入信息</a></li>
-                <li><a href="javascript:void()" class="listu" id="btnCancel">返回主页</a></li>
-            </ul>
-        </div>
         <div style="width:1200px">
             <div style="display: flex;justify-content:flex-start">
                 &emsp;&emsp;&emsp;教师姓名:<input type="text" id="txtName" style="width:100px;margin-right:10px" />
-                <input type="button" value="查找" id="btnSearch" />
+                <input type="button" value="查找" id="btnSearch" />&emsp;&emsp;&emsp;&emsp;&emsp;
+                <input type="button" value="下载模板" />&emsp;
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <input id="file" type="file" name="file" style="width:180px" />
+                </form>
+                <input type="button" id="upload" value="上传" />&emsp;
+                <a href="Main.html"><input type="button" value="返回主页" /></a>
             </div>
             <table id="tbContent" style="width:1150px">
                 <tr><th align='center'>id</th><th align='center'>用户名</th><th align='center'>姓名</th><th align='center'>移动号码</th><th align='center'>电信号码</th><th align='center'>联通号码</th><th align='center'>座机号码</th><th align='center'>E_Mail</th><th align='center'>身份证号码</th><th align='center'>权限</th><th align='center'>修改</th><th align='center'>重置密码</th></tr>

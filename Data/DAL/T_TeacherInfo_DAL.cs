@@ -21,7 +21,7 @@ namespace Data
                             new SqlParameter("EMail", PutNull(model.EMail)),
                             new SqlParameter("IDCardNO", PutNull(model.IDCardNO)),
                             new SqlParameter("Mark", model.Mark),
-                            new SqlParameter("LoginId", PutNull(Convert.ToString(model.LoginId))),
+                            new SqlParameter("LoginId", PutNull(model.LoginId)),
                             new SqlParameter("LoginOutTime", PutNull(model.LoginOutTime)),
                             new SqlParameter("LoginIP", PutNull(model.LoginIP)));
             return Convert.ToInt32(obj);

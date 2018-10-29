@@ -14,8 +14,9 @@
                 var url = "../erfen/pm.html?lun=" + $("#txtLun").val();
                 window.location.href = url;
             });
-            $("#btnListAllPm").click(function () {
-
+            $("#btnClear").click(function () {
+                $.post("../erfen/DataClear.ashx", {}, function () {
+                });
             });
         })
     </script>
@@ -25,6 +26,6 @@
     待猜测数列：<input type="text" id="txtList">&nbsp;&nbsp;&nbsp;&nbsp;
     猜测类型：<input type="text" value="0" id="txtStyle">&nbsp;&nbsp;&nbsp;&nbsp;轮次：<input type="text" id="txtLun">&nbsp;&nbsp;&nbsp;&nbsp;猜测的数值：<input type="text" id="txtNumber">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="设置猜测的数字" id="btnSet" /><br /><br /><br />
     <input type="button" id="btnListPm" value="查看排名" /> <br /> <br />
-    <input type="button" id="btnListAllPm" value="查看总排名" />
+    <input type="button" id="btnClear" value="清空数据库" />
 </body>
 </html>

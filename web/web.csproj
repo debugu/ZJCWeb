@@ -48,6 +48,9 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NPOI">
+      <HintPath>dll\NPOI.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -64,15 +67,26 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="zydControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\zydControls.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Class.html" />
     <Content Include="Admin\erfen.html" />
     <Content Include="Admin\ResetPassword.ashx" />
     <Content Include="Admin\GetTeacherList.ashx" />
+    <Content Include="erfen\dlguess.html" />
     <Content Include="erfen\ErFenGetGuessData.ashx" />
     <Content Include="erfen\erfenPutGuessResult.ashx" />
     <Content Include="erfen\erfenList.ashx" />
     <Content Include="erfen\erfenSetNumber.ashx" />
+    <Content Include="erfen\DataClear.ashx" />
+    <Content Include="download\教师信息模板.xlsx" />
+    <Content Include="Admin\ImportTeacherInfo.ashx" />
+    <Content Include="Admin\GetClassList.ashx" />
+    <Content Include="Admin\ImportClassInfo.ashx" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -82,11 +96,15 @@
     <Content Include="erfen\guess.html" />
     <Content Include="erfen\login.html" />
     <Content Include="erfen\pm.html" />
+    <Content Include="erfen\灯泡查找实现服务器检测.html" />
+    <Content Include="erfen\灯泡查找实现一.html" />
     <Content Include="erfen\二分查找实现一.html" />
+    <Content Include="erfen\灯泡查找实现二 - 复制.html" />
     <Content Include="erfen\二分查找实现二.html" />
     <Content Include="images\bg.jpg" />
     <Content Include="images\bg1.gif" />
     <Content Include="images\bg2.gif" />
+    <Content Include="index1.html" />
     <Content Include="Scripts\easyui-lang-zh_CN.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -110,16 +128,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
-    <Content Include="Teacher\Main.aspx" />
     <Content Include="Teacher\Main.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\GetClassList.ashx.cs">
+      <DependentUpon>GetClassList.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\GetTeacherList.ashx.cs">
       <DependentUpon>GetTeacherList.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ImportClassInfo.ashx.cs">
+      <DependentUpon>ImportClassInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ImportTeacherInfo.ashx.cs">
+      <DependentUpon>ImportTeacherInfo.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\ResetPassword.ashx.cs">
       <DependentUpon>ResetPassword.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="erfen\DataClear.ashx.cs">
+      <DependentUpon>DataClear.ashx</DependentUpon>
     </Compile>
     <Compile Include="erfen\ErFenGetGuessData.ashx.cs">
       <DependentUpon>ErFenGetGuessData.ashx</DependentUpon>
@@ -140,13 +169,6 @@
     <Compile Include="Teacher\Login.ashx.cs">
       <DependentUpon>Login.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Teacher\Main.aspx.cs">
-      <DependentUpon>Main.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Teacher\Main.aspx.designer.cs">
-      <DependentUpon>Main.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -158,7 +180,9 @@
       <Name>Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="upload\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

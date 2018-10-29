@@ -29,5 +29,11 @@ namespace Data
             }
             return list;
         }
+
+        public int Delete()
+        {
+            return SqlHelper.ExecuteNonQuery("delete from GuessResult");
+        }
+
     }
 }

@@ -12,30 +12,31 @@
                 var guessData = $("#guessData").val().split(":");
                 var tip = $("#txtTip").text();
                 if (tip == "猜中了！") { return false; }
-                var myguessValue = parseInt($("#txtPrice").val());
-                var myguessValueFu = parseInt($("#txtEnd").val());
+                var myguessValue = parseInt($("#txtMin").val());
+                var myguessValueFu = parseInt($("#txtMid").val());
+                var myguessValueEnd = parseInt($("#txtMax").val());
                 if (!isNaN(myguessValue) && !isNaN(myguessValueFu)) {
                     if (myguessValue != myguessValueFu) {
                         if (myguessValue <= guessData[0] && guessData[0] <= myguessValueFu) {
-                            $("#txtTip").text("开路。");
+                            $("#txtTip").text("开路");
                         } else {
-                            $("#txtTip").text("通路。");
+                            $("#txtTip").text("通路");
                         }
                         var lun = parseInt($("#guessLun").val());
                         lun = lun + 1;
                         $("#guessLun").val(lun);
-                        $("#tbData").append("<tr><td>" + lun + "</td><td>" + myguessValue + "-" + myguessValueFu + "</td><td>" + $("#txtTip").text() + "</td></tr>");
+                        $("#tbData").append("<tr><td>" + lun + "</td><td>测试范围：" + myguessValue + "-" + myguessValueEnd+"；测试仪检测点："+ myguessValueFu + "</td><td>" + $("#txtTip").text() + "</td></tr>");
                         var guessresult = $("#guessResult").val();
                         if (guessresult == "") {
-                            guessresult = myguessValue + "-" + myguessValueFu;
+                            guessresult = myguessValue + "-" + myguessValueEnd + ":" + myguessValueFu + " "+$("#txtTip").text();
                         } else {
-                            guessresult = guessresult + "," + myguessValue + "-" + myguessValueFu;
+                            guessresult = guessresult + "," + myguessValue + "-" + myguessValueEnd + ":" + myguessValueFu + " " + $("#txtTip").text();
                         }
                         $("#guessResult").val(guessresult);
                         return false;
                     } else {
                         if (myguessValue == guessData[0]) {
-                            $("#txtTip").text("找到了，该灯泡是坏的。");
+                            $("#txtTip").text("找到了。");
                             var name = prompt("恭喜你，猜中了！为了记录你的成绩，请输入您的姓名：", "");
                             while (name == "") {
                                 alert("姓名不能为空！");
@@ -44,12 +45,12 @@
                             var lun = parseInt($("#guessLun").val());
                             lun = lun + 1;
                             $("#guessLun").val(lun);
-                            $("#tbData").append("<tr><td>" + lun + "</td><td>" + myguessValue + "</td><td>" + $("#txtTip").text() + "</td></tr>");
+                            $("#tbData").append("<tr><td>" + lun + "</td><td>测试范围：" + myguessValue + "-" + myguessValueEnd + "；测试仪检测点：" + myguessValueFu + "</td><td>" + $("#txtTip").text() + "</td></tr>");
                             var guessresult = $("#guessResult").val();
                             if (guessresult == "") {
-                                guessresult = myguessValue;
+                                guessresult = myguessValue + "-" + myguessValueEnd + ":" + myguessValueFu + " " + $("#txtTip").text();
                             } else {
-                                guessresult = guessresult + "," + myguessValue;
+                                guessresult = guessresult + "," + myguessValue + "-" + myguessValueEnd + ":" + myguessValueFu + " " + $("#txtTip").text();
                             }
                             $("#guessResult").val(guessresult);
                             $.post("erfenPutGuessResult.ashx", { "Lun": guessData[1], "guessResult": guessresult, "Name": name }, function (data) {
@@ -57,17 +58,22 @@
                             $("#tbData").append("<a href='pm.html?lun=" + guessData[1] + "'>查看排名</a>");
                             return false;
                         } else {
-                            $("#txtTip").text("通路。");
+                            $("#txtTip").text("通路");
                             var lun = parseInt($("#guessLun").val());
                             lun = lun + 1;
                             $("#guessLun").val(lun);
-                            $("#tbData").append("<tr><td>" + lun + "</td><td>" + myguessValue + "</td><td>" + $("#txtTip").text() + "</td></tr>");
+                            $("#tbData").append("<tr><td>" + lun + "</td><td>测试范围：" + myguessValue + "-" + myguessValueEnd + "；测试仪检测点：" + myguessValueFu + "</td><td>" + $("#txtTip").text() + "</td></tr>");
                             var guessresult = $("#guessResult").val();
                             if (guessresult == "") {
-                                guessresult = myguessValue;
+                                guessresult = myguessValue + "-" + myguessValueEnd + ":" + myguessValueFu + " " + $("#txtTip").text();
                             } else {
-                                guessresult = guessresult + "," + myguessValue;
+                                guessresult = guessresult + "," + myguessValue + "-" + myguessValueEnd + ":" + myguessValueFu + " " + $("#txtTip").text();
                             }
+                            //if (guessresult == "") {
+                            //    guessresult = myguessValue;
+                            //} else {
+                            //    guessresult = guessresult + "," + myguessValue;
+                            //}
                             $("#guessResult").val(guessresult);
                             return false;
                         }
@@ -100,8 +106,9 @@
         <br />
         <div align="center">
             请输入万用表测试的起止灯泡编号：<br />
-            万用表正极连接的灯泡：<input type="text" id="txtPrice" />
-            万用表负极连接的灯泡：<input type="text" id="txtEnd" />
+            当前测试的开始灯泡编号：<input type="text" id="txtMin" />
+            当前测试的结束灯泡编号：<input type="text" id="txtMax" />
+            测试仪测试的灯泡编号：<input type="text" id="txtMid" />
             <input type="button" id="btnGuess" value="测试" /><br /><br />
             <span id="txtTip" style="color:red">准备测试</span><br /><br />
             <span id="txtList" style="color:red"></span>
@@ -111,7 +118,7 @@
         <table id="tbData">
             <tr>
                 <th align='center'>轮次</th>
-                <th align='center'>测试范围</th>
+                <th align='center'>测试情况</th>
                 <th align='center'>状态</th>
         </table>
         <div id="divToPM"></div>

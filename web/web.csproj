@@ -78,6 +78,7 @@
     <Content Include="Admin\ResetPassword.ashx" />
     <Content Include="Admin\GetTeacherList.ashx" />
     <Content Include="erfen\dlguess.html" />
+    <Content Include="erfen\erfen.js" />
     <Content Include="erfen\ErFenGetGuessData.ashx" />
     <Content Include="erfen\erfenPutGuessResult.ashx" />
     <Content Include="erfen\erfenList.ashx" />

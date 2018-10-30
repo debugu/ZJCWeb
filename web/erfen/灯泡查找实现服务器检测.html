@@ -17,21 +17,22 @@
                     $("#txtList").text("待测试的灯泡编号为：" + guessData[3]);
                 }
             })
-            $(function () {
-                loadGuessData();
-                $("#btnStart").click(function () {
-                    var guessData = $("#guessData").val().split(":");
-                    var guessresult = search(1, 100, guessData[0]);
-                    var name = prompt("恭喜你，猜中了！为了记录你的成绩，请输入您的姓名：", "");
-                    while (name == "") {
-                        alert("姓名不能为空！");
-                        name = prompt("请输入您的姓名：", "");
-                    }
-                    $.post("erfenPutGuessResult.ashx", { "Lun": guessData[1], "guessResult": guessresult, "Name": name }, function (data) {
-                    });
-                    $("#tbData").append("<a href='pm.html?lun=" + guessData[1] + "'>查看排名</a>");
+        }
+        $(function () {
+            loadGuessData();
+            $("#btnStart").click(function () {
+                var guessData = $("#guessData").val().split(":");
+                var guessresult = search(1, 100, guessData[0]);
+                var name = prompt("恭喜你，猜中了！为了记录你的成绩，请输入您的姓名：", "");
+                while (name == "") {
+                    alert("姓名不能为空！");
+                    name = prompt("请输入您的姓名：", "");
+                }
+                $.post("erfenPutGuessResult.ashx", { "Lun": guessData[1], "guessResult": guessresult, "Name": name }, function (data) {
                 });
-            })
+                $("#tbData").append("<a href='pm.html?lun=" + guessData[1] + "'>查看排名</a>");
+            });
+        })
     </script>
 </head>
 <body>

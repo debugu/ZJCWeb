@@ -1,20 +1,22 @@
-﻿using System;
+﻿using Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace web.Student
+namespace web.DataASHX
 {
     /// <summary>
-    /// Login 的摘要说明
+    /// DelStuRelationshipByStuCardID 的摘要说明
     /// </summary>
-    public class Login : IHttpHandler
+    public class DelStuRelationshipByStuCardID : IHttpHandler
     {
 
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
-            context.Response.Write("Hello World");
+            string id = context.Request.Form["id"];
+            context.Response.Write(new StuRelationshipBLL().DeleteByCarId(id));
         }
 
         public bool IsReusable

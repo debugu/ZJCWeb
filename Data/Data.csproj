@@ -30,7 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>bin\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -68,7 +72,7 @@
     <Compile Include="DAL\GuessPara_DAL_Ext.cs" />
     <Compile Include="DAL\GuessResult_DAL.cs" />
     <Compile Include="DAL\GuessResult_DAL_Ext.cs" />
-    <Compile Include="DAL\SqlHelper.cs" />
+    <Compile Include="DAL\MySqlHelper.cs" />
     <Compile Include="DAL\T_BoarderInfo_DAL.cs" />
     <Compile Include="DAL\T_BoarderInfo_DAL_Ext.cs" />
     <Compile Include="DAL\T_Class_DAL.cs" />
@@ -91,6 +95,7 @@
     <Compile Include="DAL\V_Class_DAL_Ext.cs" />
     <Compile Include="Model\GuessPara_Model.cs" />
     <Compile Include="Model\GuessResult_Model.cs" />
+    <Compile Include="Model\TT_JHInfo.cs" />
     <Compile Include="Model\T_BoarderInfo_Model.cs" />
     <Compile Include="Model\T_Class_Model.cs" />
     <Compile Include="Model\T_ExternInfo_Model.cs" />

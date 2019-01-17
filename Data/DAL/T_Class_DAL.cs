@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using System.Data.OleDb;
+using MySql.Data.MySqlClient;
 
 namespace Data
 {
@@ -12,35 +13,35 @@ namespace Data
     {
         public int AddNew(ClassModel model)
         {
-            object obj = SqlHelper.ExecuteScalar("insert into T_Class(id,TeacherId,ClassName,Year,Remark) values(@id,@TeacherId,@ClassName,@Year,@Remark )",
-                            new SqlParameter("id", model.id),
-                            new SqlParameter("TeacherId", model.TeacherId),
-                            new SqlParameter("ClassName", model.ClassName),
-                            new SqlParameter("Year", model.Year),
-                            new SqlParameter("Remark", PutNull(model.Remark)));
+            object obj = SqlHelper.ExecuteScalar("insert into T_Class(id,TeacherId,ClassName,Year,Remark) values(@id,@TeacherId,@ClassName,@Year,@Remark)",
+                            new MySqlParameter("id", model.id),
+                            new MySqlParameter("TeacherId", model.TeacherId),
+                            new MySqlParameter("ClassName", model.ClassName),
+                            new MySqlParameter("Year", model.Year),
+                            new MySqlParameter("Remark", PutNull(model.Remark)));
             return Convert.ToInt32(obj);
         }
 
         public int Delete(Guid id)
         {
             return SqlHelper.ExecuteNonQuery("delete from T_Class where id=@id",
-                new SqlParameter("id",id));
+                new MySqlParameter("id",id));
         }
 
         public int Update(ClassModel model)
         {
             object obj = SqlHelper.ExecuteScalar("update T_Class set TeacherId=@TeacherId,ClassName=@ClassName,Year=@Year,Remark=@Remark where id=@id",
-                            new SqlParameter("TeacherId", model.TeacherId),
-                            new SqlParameter("ClassName", model.ClassName),
-                            new SqlParameter("Year", model.Year),
-                            new SqlParameter("Remark", PutNull(model.Remark)),
-                new SqlParameter("id",model.id));
+                            new MySqlParameter("TeacherId", model.TeacherId),
+                            new MySqlParameter("ClassName", model.ClassName),
+                            new MySqlParameter("Year", model.Year),
+                            new MySqlParameter("Remark", PutNull(model.Remark)),
+                new MySqlParameter("id",model.id));
             return Convert.ToInt32(obj);
         }
         public ClassModel Get(Guid id)
         {
             DataTable dt = SqlHelper.ExecuteDataTable("select * from T_Class where id=@id",
-                new SqlParameter("id",id));
+                new MySqlParameter("id",id));
             if (dt.Rows.Count <= 0)
             {
                 return null;
@@ -49,7 +50,7 @@ namespace Data
             {
                 ClassModel model = new ClassModel();
                 DataRow row = dt.Rows[0];
-                model.id= (Guid)row["id"];
+                model.id= new Guid(row["id"].ToString());
                 model.TeacherId= (Guid)row["TeacherId"];
                 model.ClassName= (string)row["ClassName"];
                 model.Year= (string)row["Year"];
@@ -69,7 +70,7 @@ namespace Data
             foreach (DataRow row in dt.Rows)
             {
                 ClassModel model = new ClassModel();
-                model.id= (Guid)row["id"];
+                model.id= new Guid(row["id"].ToString());
                 model.TeacherId= (Guid)row["TeacherId"];
                 model.ClassName= (string)row["ClassName"];
                 model.Year= (string)row["Year"];

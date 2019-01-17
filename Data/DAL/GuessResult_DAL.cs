@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using System.Data.OleDb;
+using MySql.Data.MySqlClient;
 
 namespace Data
 {
@@ -13,37 +14,37 @@ namespace Data
         public int AddNew(GuessResultModel model)
         {
             object obj = SqlHelper.ExecuteScalar("insert into GuessResult(StuName,IP,Lun,GuessPath,GuessNumber,Remark) values(@StuName,@IP,@Lun,@GuessPath,@GuessNumber,@Remark )",
-                            new SqlParameter("StuName", model.StuName),
-                            new SqlParameter("IP", PutNull(model.IP)),
-                            new SqlParameter("Lun", model.Lun),
-                            new SqlParameter("GuessPath", model.GuessPath),
-                            new SqlParameter("GuessNumber", model.GuessNumber),
-                            new SqlParameter("Remark", PutNull(model.Remark)));
+                            new MySqlParameter("StuName", model.StuName),
+                            new MySqlParameter("IP", PutNull(model.IP)),
+                            new MySqlParameter("Lun", model.Lun),
+                            new MySqlParameter("GuessPath", model.GuessPath),
+                            new MySqlParameter("GuessNumber", model.GuessNumber),
+                            new MySqlParameter("Remark", PutNull(model.Remark)));
             return Convert.ToInt32(obj);
         }
 
         public int Delete(int id)
         {
             return SqlHelper.ExecuteNonQuery("delete from GuessResult where id=@id",
-                new SqlParameter("id",id));
+                new MySqlParameter("id",id));
         }
 
         public int Update(GuessResultModel model)
         {
             object obj = SqlHelper.ExecuteScalar("update GuessResult set StuName=@StuName,IP=@IP,Lun=@Lun,GuessPath=@GuessPath,GuessNumber=@GuessNumber,Remark=@Remark where id=@id",
-                            new SqlParameter("StuName", model.StuName),
-                            new SqlParameter("IP", PutNull(model.IP)),
-                            new SqlParameter("Lun", model.Lun),
-                            new SqlParameter("GuessPath", model.GuessPath),
-                            new SqlParameter("GuessNumber", model.GuessNumber),
-                            new SqlParameter("Remark", PutNull(model.Remark)),
-                new SqlParameter("id",model.id));
+                            new MySqlParameter("StuName", model.StuName),
+                            new MySqlParameter("IP", PutNull(model.IP)),
+                            new MySqlParameter("Lun", model.Lun),
+                            new MySqlParameter("GuessPath", model.GuessPath),
+                            new MySqlParameter("GuessNumber", model.GuessNumber),
+                            new MySqlParameter("Remark", PutNull(model.Remark)),
+                new MySqlParameter("id",model.id));
             return Convert.ToInt32(obj);
         }
         public GuessResultModel Get(int id)
         {
             DataTable dt = SqlHelper.ExecuteDataTable("select * from GuessResult where id=@id",
-                new SqlParameter("id",id));
+                new MySqlParameter("id",id));
             if (dt.Rows.Count <= 0)
             {
                 return null;

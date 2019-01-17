@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using System.Data.OleDb;
+using MySql.Data.MySqlClient;
 
 namespace Data
 {
@@ -13,40 +14,40 @@ namespace Data
         public int AddNew(PunishRecordModel model)
         {
             object obj = SqlHelper.ExecuteScalar("insert into T_PunishRecord(id,StuId,PunishClassId,PunishTime,Reason,IsCancel,CancelTime,CancelClassId) values(@id,@StuId,@PunishClassId,@PunishTime,@Reason,@IsCancel,@CancelTime,@CancelClassId )",
-                            new SqlParameter("id", model.id),
-                            new SqlParameter("StuId", model.StuId),
-                            new SqlParameter("PunishClassId", model.PunishClassId),
-                            new SqlParameter("PunishTime", model.PunishTime),
-                            new SqlParameter("Reason", PutNull(model.Reason)),
-                            new SqlParameter("IsCancel", model.IsCancel),
-                            new SqlParameter("CancelTime", PutNull(model.CancelTime)),
-                            new SqlParameter("CancelClassId", PutNull(model.CancelClassId)));
+                            new MySqlParameter("id", model.id),
+                            new MySqlParameter("StuId", model.StuId),
+                            new MySqlParameter("PunishClassId", model.PunishClassId),
+                            new MySqlParameter("PunishTime", model.PunishTime),
+                            new MySqlParameter("Reason", PutNull(model.Reason)),
+                            new MySqlParameter("IsCancel", model.IsCancel),
+                            new MySqlParameter("CancelTime", PutNull(model.CancelTime)),
+                            new MySqlParameter("CancelClassId", PutNull(model.CancelClassId)));
             return Convert.ToInt32(obj);
         }
 
         public int Delete(Guid id)
         {
             return SqlHelper.ExecuteNonQuery("delete from T_PunishRecord where id=@id",
-                new SqlParameter("id",id));
+                new MySqlParameter("id",id));
         }
 
         public int Update(PunishRecordModel model)
         {
             object obj = SqlHelper.ExecuteScalar("update T_PunishRecord set StuId=@StuId,PunishClassId=@PunishClassId,PunishTime=@PunishTime,Reason=@Reason,IsCancel=@IsCancel,CancelTime=@CancelTime,CancelClassId=@CancelClassId where id=@id",
-                            new SqlParameter("StuId", model.StuId),
-                            new SqlParameter("PunishClassId", model.PunishClassId),
-                            new SqlParameter("PunishTime", model.PunishTime),
-                            new SqlParameter("Reason", PutNull(model.Reason)),
-                            new SqlParameter("IsCancel", model.IsCancel),
-                            new SqlParameter("CancelTime", PutNull(model.CancelTime)),
-                            new SqlParameter("CancelClassId", PutNull(model.CancelClassId)),
-                new SqlParameter("id",model.id));
+                            new MySqlParameter("StuId", model.StuId),
+                            new MySqlParameter("PunishClassId", model.PunishClassId),
+                            new MySqlParameter("PunishTime", model.PunishTime),
+                            new MySqlParameter("Reason", PutNull(model.Reason)),
+                            new MySqlParameter("IsCancel", model.IsCancel),
+                            new MySqlParameter("CancelTime", PutNull(model.CancelTime)),
+                            new MySqlParameter("CancelClassId", PutNull(model.CancelClassId)),
+                new MySqlParameter("id",model.id));
             return Convert.ToInt32(obj);
         }
         public PunishRecordModel Get(Guid id)
         {
             DataTable dt = SqlHelper.ExecuteDataTable("select * from T_PunishRecord where id=@id",
-                new SqlParameter("id",id));
+                new MySqlParameter("id",id));
             if (dt.Rows.Count <= 0)
             {
                 return null;
@@ -55,8 +56,8 @@ namespace Data
             {
                 PunishRecordModel model = new PunishRecordModel();
                 DataRow row = dt.Rows[0];
-                model.id= (Guid)row["id"];
-                model.StuId= (Guid)row["StuId"];
+                model.id= new Guid(row["id"].ToString());
+                model.StuId= new Guid(row["StuId"].ToString());
                 model.PunishClassId= (Guid)row["PunishClassId"];
                 model.PunishTime= (DateTime)row["PunishTime"];
                 model.Reason= (string)GetNull(row["Reason"]);
@@ -78,8 +79,8 @@ namespace Data
             foreach (DataRow row in dt.Rows)
             {
                 PunishRecordModel model = new PunishRecordModel();
-                model.id= (Guid)row["id"];
-                model.StuId= (Guid)row["StuId"];
+                model.id= new Guid(row["id"].ToString());
+                model.StuId= new Guid(row["StuId"].ToString());
                 model.PunishClassId= (Guid)row["PunishClassId"];
                 model.PunishTime= (DateTime)row["PunishTime"];
                 model.Reason= (string)GetNull(row["Reason"]);

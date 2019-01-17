@@ -67,16 +67,14 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="zydControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>dll\zydControls.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\Class.html" />
     <Content Include="Admin\erfen.html" />
     <Content Include="Admin\ResetPassword.ashx" />
     <Content Include="Admin\GetTeacherList.ashx" />
+    <Content Include="Admin\StudentInfo.html" />
+    <Content Include="css\jquery.mobile-1.3.2.min.css" />
     <Content Include="erfen\dlguess.html" />
     <Content Include="erfen\erfen.js" />
     <Content Include="erfen\ErFenGetGuessData.ashx" />
@@ -88,6 +86,13 @@
     <Content Include="Admin\ImportTeacherInfo.ashx" />
     <Content Include="Admin\GetClassList.ashx" />
     <Content Include="Admin\ImportClassInfo.ashx" />
+    <Content Include="DataASHX\GetStuInfo.ashx" />
+    <Content Include="DataASHX\AddStuRelationship.ashx" />
+    <Content Include="DataASHX\DelStuRelationshipByStuCardID.ashx" />
+    <Content Include="Admin\ImportStudentInfo.ashx" />
+    <Content Include="Admin\GetStuList.ashx" />
+    <Content Include="Admin\ExportStuInfo.ashx" />
+    <Content Include="Admin\ExportJHInfo.ashx" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -105,9 +110,13 @@
     <Content Include="images\bg.jpg" />
     <Content Include="images\bg1.gif" />
     <Content Include="images\bg2.gif" />
-    <Content Include="index1.html" />
+    <Content Include="m\AddEditInfo.html" />
+    <Content Include="m\index.html" />
+    <Content Include="m\login.html" />
+    <Content Include="m\ShowInfo.html" />
     <Content Include="Scripts\easyui-lang-zh_CN.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.8.3.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -116,9 +125,9 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.easyui.min.js" />
+    <Content Include="Scripts\jquery.mobile-1.3.2.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Student\Login.ashx" />
     <Content Include="Teacher\Login.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -133,8 +142,17 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\ExportJHInfo.ashx.cs">
+      <DependentUpon>ExportJHInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ExportStuInfo.ashx.cs">
+      <DependentUpon>ExportStuInfo.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\GetClassList.ashx.cs">
       <DependentUpon>GetClassList.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\GetStuList.ashx.cs">
+      <DependentUpon>GetStuList.ashx</DependentUpon>
     </Compile>
     <Compile Include="Admin\GetTeacherList.ashx.cs">
       <DependentUpon>GetTeacherList.ashx</DependentUpon>
@@ -142,11 +160,23 @@
     <Compile Include="Admin\ImportClassInfo.ashx.cs">
       <DependentUpon>ImportClassInfo.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ImportStudentInfo.ashx.cs">
+      <DependentUpon>ImportStudentInfo.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\ImportTeacherInfo.ashx.cs">
       <DependentUpon>ImportTeacherInfo.ashx</DependentUpon>
     </Compile>
     <Compile Include="Admin\ResetPassword.ashx.cs">
       <DependentUpon>ResetPassword.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataASHX\AddStuRelationship.ashx.cs">
+      <DependentUpon>AddStuRelationship.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataASHX\DelStuRelationshipByStuCardID.ashx.cs">
+      <DependentUpon>DelStuRelationshipByStuCardID.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="DataASHX\GetStuInfo.ashx.cs">
+      <DependentUpon>GetStuInfo.ashx</DependentUpon>
     </Compile>
     <Compile Include="erfen\DataClear.ashx.cs">
       <DependentUpon>DataClear.ashx</DependentUpon>
@@ -164,9 +194,6 @@
       <DependentUpon>erfenSetNumber.ashx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Student\Login.ashx.cs">
-      <DependentUpon>Login.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Teacher\Login.ashx.cs">
       <DependentUpon>Login.ashx</DependentUpon>
     </Compile>

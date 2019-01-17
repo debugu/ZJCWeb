@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using System.Data.OleDb;
+using MySql.Data.MySqlClient;
 
 namespace Data
 {
@@ -13,7 +14,7 @@ namespace Data
         public IEnumerable<GuessResultModel> GetAll(int lun)
         {
             DataTable dt = SqlHelper.ExecuteDataTable("select * from GuessResult where Lun=@Lun order by GuessNumber",
-                new SqlParameter("Lun", lun));
+                new MySqlParameter("Lun", lun));
             List<GuessResultModel> list = new List<GuessResultModel>();
             foreach (DataRow row in dt.Rows)
             {

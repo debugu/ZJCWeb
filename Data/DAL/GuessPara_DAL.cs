@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using System.Data.OleDb;
+using MySql.Data.MySqlClient;
 
 namespace Data
 {
@@ -13,33 +14,33 @@ namespace Data
         public int AddNew(GuessParaModel model)
         {
             object obj = SqlHelper.ExecuteScalar("insert into GuessPara(GuessValue,Lun,GuessStyle,GuessList) values(@GuessValue,@Lun,@GuessStyle,@GuessList )",
-                            new SqlParameter("GuessValue", model.GuessValue),
-                            new SqlParameter("Lun", model.Lun),
-                            new SqlParameter("GuessStyle", model.GuessStyle),
-                            new SqlParameter("GuessList", PutNull(model.GuessList)));
+                            new MySqlParameter("GuessValue", model.GuessValue),
+                            new MySqlParameter("Lun", model.Lun),
+                            new MySqlParameter("GuessStyle", model.GuessStyle),
+                            new MySqlParameter("GuessList", PutNull(model.GuessList)));
             return Convert.ToInt32(obj);
         }
 
         public int Delete(int id)
         {
             return SqlHelper.ExecuteNonQuery("delete from GuessPara where id=@id",
-                new SqlParameter("id",id));
+                new MySqlParameter("id",id));
         }
 
         public int Update(GuessParaModel model)
         {
             object obj = SqlHelper.ExecuteScalar("update GuessPara set GuessValue=@GuessValue,Lun=@Lun,GuessStyle=@GuessStyle,GuessList=@GuessList where id=@id",
-                            new SqlParameter("GuessValue", model.GuessValue),
-                            new SqlParameter("Lun", model.Lun),
-                            new SqlParameter("GuessStyle", model.GuessStyle),
-                            new SqlParameter("GuessList", PutNull(model.GuessList)),
-                new SqlParameter("id",model.id));
+                            new MySqlParameter("GuessValue", model.GuessValue),
+                            new MySqlParameter("Lun", model.Lun),
+                            new MySqlParameter("GuessStyle", model.GuessStyle),
+                            new MySqlParameter("GuessList", PutNull(model.GuessList)),
+                new MySqlParameter("id",model.id));
             return Convert.ToInt32(obj);
         }
         public GuessParaModel Get(int id)
         {
             DataTable dt = SqlHelper.ExecuteDataTable("select * from GuessPara where id=@id",
-                new SqlParameter("id",id));
+                new MySqlParameter("id",id));
             if (dt.Rows.Count <= 0)
             {
                 return null;

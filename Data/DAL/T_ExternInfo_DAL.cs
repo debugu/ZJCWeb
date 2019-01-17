@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using System.Data.OleDb;
+using MySql.Data.MySqlClient;
 
 namespace Data
 {
@@ -13,34 +14,34 @@ namespace Data
         public int AddNew(ExternInfoModel model)
         {
             object obj = SqlHelper.ExecuteScalar("insert into T_ExternInfo(id,StuId,GoSchoolTool,ShuttleMode,ClassId) values(@id,@StuId,@GoSchoolTool,@ShuttleMode,@ClassId )",
-                            new SqlParameter("id", model.id),
-                            new SqlParameter("StuId", model.StuId),
-                            new SqlParameter("GoSchoolTool", PutNull(model.GoSchoolTool)),
-                            new SqlParameter("ShuttleMode", PutNull(model.ShuttleMode)),
-                            new SqlParameter("ClassId", model.ClassId));
+                            new MySqlParameter("id", model.id),
+                            new MySqlParameter("StuId", model.StuId),
+                            new MySqlParameter("GoSchoolTool", PutNull(model.GoSchoolTool)),
+                            new MySqlParameter("ShuttleMode", PutNull(model.ShuttleMode)),
+                            new MySqlParameter("ClassId", model.ClassId));
             return Convert.ToInt32(obj);
         }
 
         public int Delete(Guid id)
         {
             return SqlHelper.ExecuteNonQuery("delete from T_ExternInfo where id=@id",
-                new SqlParameter("id",id));
+                new MySqlParameter("id",id));
         }
 
         public int Update(ExternInfoModel model)
         {
             object obj = SqlHelper.ExecuteScalar("update T_ExternInfo set StuId=@StuId,GoSchoolTool=@GoSchoolTool,ShuttleMode=@ShuttleMode,ClassId=@ClassId where id=@id",
-                            new SqlParameter("StuId", model.StuId),
-                            new SqlParameter("GoSchoolTool", PutNull(model.GoSchoolTool)),
-                            new SqlParameter("ShuttleMode", PutNull(model.ShuttleMode)),
-                            new SqlParameter("ClassId", model.ClassId),
-                new SqlParameter("id",model.id));
+                            new MySqlParameter("StuId", model.StuId),
+                            new MySqlParameter("GoSchoolTool", PutNull(model.GoSchoolTool)),
+                            new MySqlParameter("ShuttleMode", PutNull(model.ShuttleMode)),
+                            new MySqlParameter("ClassId", model.ClassId),
+                new MySqlParameter("id",model.id));
             return Convert.ToInt32(obj);
         }
         public ExternInfoModel Get(Guid id)
         {
             DataTable dt = SqlHelper.ExecuteDataTable("select * from T_ExternInfo where id=@id",
-                new SqlParameter("id",id));
+                new MySqlParameter("id",id));
             if (dt.Rows.Count <= 0)
             {
                 return null;
@@ -49,11 +50,11 @@ namespace Data
             {
                 ExternInfoModel model = new ExternInfoModel();
                 DataRow row = dt.Rows[0];
-                model.id= (Guid)row["id"];
-                model.StuId= (Guid)row["StuId"];
+                model.id= new Guid(row["id"].ToString());
+                model.StuId= new Guid(row["StuId"].ToString());
                 model.GoSchoolTool= (string)GetNull(row["GoSchoolTool"]);
                 model.ShuttleMode= (string)GetNull(row["ShuttleMode"]);
-                model.ClassId= (Guid)row["ClassId"];
+                model.ClassId= new Guid(row["ClassId"].ToString());
                 return model;
             }
             else
@@ -69,11 +70,11 @@ namespace Data
             foreach (DataRow row in dt.Rows)
             {
                 ExternInfoModel model = new ExternInfoModel();
-                model.id= (Guid)row["id"];
-                model.StuId= (Guid)row["StuId"];
+                model.id= new Guid(row["id"].ToString());
+                model.StuId= new Guid(row["StuId"].ToString());
                 model.GoSchoolTool= (string)GetNull(row["GoSchoolTool"]);
                 model.ShuttleMode= (string)GetNull(row["ShuttleMode"]);
-                model.ClassId= (Guid)row["ClassId"];
+                model.ClassId= new Guid(row["ClassId"].ToString());
                 list.Add(model);
             }
             return list;

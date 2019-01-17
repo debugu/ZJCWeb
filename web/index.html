@@ -11,9 +11,9 @@
                     $("#msgTd").text("必须填写用户名和密码");
                     return false;
                 } else {
-                    var val = $('input:radio[name="userGroup"]:checked').val();
-                    if (val=="Teacher")
-                    {
+                    //var val = $('input:radio[name="userGroup"]:checked').val();
+                    //if (val=="Teacher")
+                    //{
                         $.ajax({
                             type:"POST",
                             url:"Teacher/Login.ashx",
@@ -33,23 +33,23 @@
                                 }
                             }
                         });
-                    } else {
-                        $.ajax({
-                            type: "post",
-                            url: "Student/Login.ashx",
-                            data: "UserName=" + $("#txtUserName").val() + "&Password=" + $("#txtPassword").val(),
-                            sucess: function (data) {
-                                switch (data) {
-                                    case "error":
-                                        $("#msgTd").text("用户名或密码错误");
-                                        return false;
-                                    default:
-                                        location.href = "Student/Main.html";
-                                        break;
-                                }
-                            }
-                        });
-                    }
+                    //} else {
+                    //    $.ajax({
+                    //        type: "post",
+                    //        url: "Student/Login.ashx",
+                    //        data: "UserName=" + $("#txtUserName").val() + "&Password=" + $("#txtPassword").val(),
+                    //        sucess: function (data) {
+                    //            switch (data) {
+                    //                case "error":
+                    //                    $("#msgTd").text("用户名或密码错误");
+                    //                    return false;
+                    //                default:
+                    //                    location.href = "Student/Main.html";
+                    //                    break;
+                    //            }
+                    //        }
+                    //    });
+                    //}
                 }
             });
         });
@@ -57,7 +57,7 @@
 </head>
 <body  background="/images/bg2.gif">
     <div style="height:80px"></div>
-<div align="center" style="font-size:60px">后台管理</div>
+<div align="center" style="font-size:60px">南莫中学学生信息管理系统</div>
     <br /><br /><br /><br />
     <div align="center">
         <table border="0" style="width:250px">
@@ -70,11 +70,11 @@
             <tr>
                 <td>密&ensp;&ensp;码：<input type="password" id="txtPassword" style="width:150px"/></td></tr>
             <tr height="15"><td></td></tr>  
-            <tr>
+            <!--<tr>
                 <td align="center"><input type="radio" checked="checked" value="Teacher" id="rdTeacher" name="userGroup"/>教师
                 <input type="radio" value="Student" id="rdStudent" name="userGroup"/>学生
                 </td>
-            </tr>
+            </tr>-->
             <tr height="15"><td></td></tr> 
             <tr>
                 <td align="center">

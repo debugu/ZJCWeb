@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using System.Data.OleDb;
+using MySql.Data.MySqlClient;
 
 namespace Data
 {
@@ -13,46 +14,46 @@ namespace Data
         public int AddNew(TenantInfoModel model)
         {
             object obj = SqlHelper.ExecuteScalar("insert into T_TenantInfo(id,StuId,NowAddress,Area,TogetherStuNum,LandlordName,LandlordTel,Accompanyer1,Accompanyer2,IsInSchool,ClassId) values(@id,@StuId,@NowAddress,@Area,@TogetherStuNum,@LandlordName,@LandlordTel,@Accompanyer1,@Accompanyer2,@IsInSchool,@ClassId )",
-                            new SqlParameter("id", model.id),
-                            new SqlParameter("StuId", model.StuId),
-                            new SqlParameter("NowAddress", PutNull(model.NowAddress)),
-                            new SqlParameter("Area", PutNull(model.Area)),
-                            new SqlParameter("TogetherStuNum", PutNull(model.TogetherStuNum)),
-                            new SqlParameter("LandlordName", PutNull(model.LandlordName)),
-                            new SqlParameter("LandlordTel", PutNull(model.LandlordTel)),
-                            new SqlParameter("Accompanyer1", PutNull(model.Accompanyer1)),
-                            new SqlParameter("Accompanyer2", PutNull(model.Accompanyer2)),
-                            new SqlParameter("IsInSchool", model.IsInSchool),
-                            new SqlParameter("ClassId", model.ClassId));
+                            new MySqlParameter("id", model.id),
+                            new MySqlParameter("StuId", model.StuId),
+                            new MySqlParameter("NowAddress", PutNull(model.NowAddress)),
+                            new MySqlParameter("Area", PutNull(model.Area)),
+                            new MySqlParameter("TogetherStuNum", PutNull(model.TogetherStuNum)),
+                            new MySqlParameter("LandlordName", PutNull(model.LandlordName)),
+                            new MySqlParameter("LandlordTel", PutNull(model.LandlordTel)),
+                            new MySqlParameter("Accompanyer1", PutNull(model.Accompanyer1)),
+                            new MySqlParameter("Accompanyer2", PutNull(model.Accompanyer2)),
+                            new MySqlParameter("IsInSchool", model.IsInSchool),
+                            new MySqlParameter("ClassId", model.ClassId));
             return Convert.ToInt32(obj);
         }
 
         public int Delete(Guid id)
         {
             return SqlHelper.ExecuteNonQuery("delete from T_TenantInfo where id=@id",
-                new SqlParameter("id",id));
+                new MySqlParameter("id",id));
         }
 
         public int Update(TenantInfoModel model)
         {
             object obj = SqlHelper.ExecuteScalar("update T_TenantInfo set StuId=@StuId,NowAddress=@NowAddress,Area=@Area,TogetherStuNum=@TogetherStuNum,LandlordName=@LandlordName,LandlordTel=@LandlordTel,Accompanyer1=@Accompanyer1,Accompanyer2=@Accompanyer2,IsInSchool=@IsInSchool,ClassId=@ClassId where id=@id",
-                            new SqlParameter("StuId", model.StuId),
-                            new SqlParameter("NowAddress", PutNull(model.NowAddress)),
-                            new SqlParameter("Area", PutNull(model.Area)),
-                            new SqlParameter("TogetherStuNum", PutNull(model.TogetherStuNum)),
-                            new SqlParameter("LandlordName", PutNull(model.LandlordName)),
-                            new SqlParameter("LandlordTel", PutNull(model.LandlordTel)),
-                            new SqlParameter("Accompanyer1", PutNull(model.Accompanyer1)),
-                            new SqlParameter("Accompanyer2", PutNull(model.Accompanyer2)),
-                            new SqlParameter("IsInSchool", model.IsInSchool),
-                            new SqlParameter("ClassId", model.ClassId),
-                new SqlParameter("id",model.id));
+                            new MySqlParameter("StuId", model.StuId),
+                            new MySqlParameter("NowAddress", PutNull(model.NowAddress)),
+                            new MySqlParameter("Area", PutNull(model.Area)),
+                            new MySqlParameter("TogetherStuNum", PutNull(model.TogetherStuNum)),
+                            new MySqlParameter("LandlordName", PutNull(model.LandlordName)),
+                            new MySqlParameter("LandlordTel", PutNull(model.LandlordTel)),
+                            new MySqlParameter("Accompanyer1", PutNull(model.Accompanyer1)),
+                            new MySqlParameter("Accompanyer2", PutNull(model.Accompanyer2)),
+                            new MySqlParameter("IsInSchool", model.IsInSchool),
+                            new MySqlParameter("ClassId", model.ClassId),
+                new MySqlParameter("id",model.id));
             return Convert.ToInt32(obj);
         }
         public TenantInfoModel Get(Guid id)
         {
             DataTable dt = SqlHelper.ExecuteDataTable("select * from T_TenantInfo where id=@id",
-                new SqlParameter("id",id));
+                new MySqlParameter("id",id));
             if (dt.Rows.Count <= 0)
             {
                 return null;
@@ -61,8 +62,8 @@ namespace Data
             {
                 TenantInfoModel model = new TenantInfoModel();
                 DataRow row = dt.Rows[0];
-                model.id= (Guid)row["id"];
-                model.StuId= (Guid)row["StuId"];
+                model.id= new Guid(row["id"].ToString());
+                model.StuId= new Guid(row["StuId"].ToString());
                 model.NowAddress= (string)GetNull(row["NowAddress"]);
                 model.Area= (int?)GetNull(row["Area"]);
                 model.TogetherStuNum= (int?)GetNull(row["TogetherStuNum"]);
@@ -71,7 +72,7 @@ namespace Data
                 model.Accompanyer1= (Guid?)GetNull(row["Accompanyer1"]);
                 model.Accompanyer2= (Guid?)GetNull(row["Accompanyer2"]);
                 model.IsInSchool= (bool)row["IsInSchool"];
-                model.ClassId= (Guid)row["ClassId"];
+                model.ClassId= new Guid(row["ClassId"].ToString());
                 return model;
             }
             else
@@ -87,8 +88,8 @@ namespace Data
             foreach (DataRow row in dt.Rows)
             {
                 TenantInfoModel model = new TenantInfoModel();
-                model.id= (Guid)row["id"];
-                model.StuId= (Guid)row["StuId"];
+                model.id= new Guid(row["id"].ToString());
+                model.StuId= new Guid(row["StuId"].ToString());
                 model.NowAddress= (string)GetNull(row["NowAddress"]);
                 model.Area= (int?)GetNull(row["Area"]);
                 model.TogetherStuNum= (int?)GetNull(row["TogetherStuNum"]);
@@ -97,7 +98,7 @@ namespace Data
                 model.Accompanyer1= (Guid?)GetNull(row["Accompanyer1"]);
                 model.Accompanyer2= (Guid?)GetNull(row["Accompanyer2"]);
                 model.IsInSchool= (bool)row["IsInSchool"];
-                model.ClassId= (Guid)row["ClassId"];
+                model.ClassId= new Guid(row["ClassId"].ToString());
                 list.Add(model);
             }
             return list;

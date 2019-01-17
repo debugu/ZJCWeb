@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using System.Data.OleDb;
+using MySql.Data.MySqlClient;
 
 namespace Data
 {
@@ -12,7 +13,7 @@ namespace Data
     {
         public TeacherInfoModel Get(string UserName)
         {
-            DataTable dt = SqlHelper.ExecuteDataTable("select * from T_TeacherInfo where UserName=@UserName", new SqlParameter("@UserName", UserName));
+            DataTable dt = SqlHelper.ExecuteDataTable("select * from T_TeacherInfo where UserName=@UserName", new MySqlParameter("@UserName", UserName));
             if (dt.Rows.Count <= 0)
             {
                 return null;
@@ -21,7 +22,7 @@ namespace Data
             {
                 TeacherInfoModel model = new TeacherInfoModel();
                 DataRow row = dt.Rows[0];
-                model.id = (Guid)row["id"];
+                model.id = new Guid(row["id"].ToString());
                 model.Name = (string)row["Name"];
                 model.UserName = (string)row["UserName"];
                 model.Password = (string)row["Password"];

@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using System.Data.OleDb;
+using MySql.Data.MySqlClient;
 
 namespace Data
 {
@@ -12,39 +13,39 @@ namespace Data
     {
         public int AddNew(StuRelationshipModel model)
         {
-            object obj = SqlHelper.ExecuteScalar("insert into T_StuRelationship(id,StuId,Call,Name,IDCardNO,Tel,WorkAddress) values(@id,@StuId,@Call,@Name,@IDCardNO,@Tel,@WorkAddress )",
-                            new SqlParameter("id", model.id),
-                            new SqlParameter("StuId", model.StuId),
-                            new SqlParameter("Call", PutNull(model.Call)),
-                            new SqlParameter("Name", PutNull(model.Name)),
-                            new SqlParameter("IDCardNO", PutNull(model.IDCardNO)),
-                            new SqlParameter("Tel", PutNull(model.Tel)),
-                            new SqlParameter("WorkAddress", PutNull(model.WorkAddress)));
+            object obj = SqlHelper.ExecuteScalar("insert into T_StuRelationship(id,StuId,XCall,XName,IDCardNO,Tel,WorkAddress) values(@id,@StuId,@XCall,@XName,@IDCardNO,@Tel,@WorkAddress)",
+                            new MySqlParameter("id", model.id),
+                            new MySqlParameter("StuId", model.StuId),
+                            new MySqlParameter("XCall", PutNull(model.XCall)),
+                            new MySqlParameter("XName", PutNull(model.XName)),
+                            new MySqlParameter("IDCardNO", PutNull(model.IDCardNO)),
+                            new MySqlParameter("Tel", PutNull(model.Tel)),
+                            new MySqlParameter("WorkAddress", PutNull(model.WorkAddress)));
             return Convert.ToInt32(obj);
         }
 
         public int Delete(Guid id)
         {
             return SqlHelper.ExecuteNonQuery("delete from T_StuRelationship where id=@id",
-                new SqlParameter("id",id));
+                new MySqlParameter("id",id));
         }
 
         public int Update(StuRelationshipModel model)
         {
-            object obj = SqlHelper.ExecuteScalar("update T_StuRelationship set StuId=@StuId,Call=@Call,Name=@Name,IDCardNO=@IDCardNO,Tel=@Tel,WorkAddress=@WorkAddress where id=@id",
-                            new SqlParameter("StuId", model.StuId),
-                            new SqlParameter("Call", PutNull(model.Call)),
-                            new SqlParameter("Name", PutNull(model.Name)),
-                            new SqlParameter("IDCardNO", PutNull(model.IDCardNO)),
-                            new SqlParameter("Tel", PutNull(model.Tel)),
-                            new SqlParameter("WorkAddress", PutNull(model.WorkAddress)),
-                new SqlParameter("id",model.id));
+            object obj = SqlHelper.ExecuteScalar("update T_StuRelationship set StuId=@StuId,XCall=@XCall,XName=@XName,IDCardNO=@IDCardNO,Tel=@Tel,WorkAddress=@WorkAddress where id=@id",
+                            new MySqlParameter("StuId", model.StuId),
+                            new MySqlParameter("XCall", PutNull(model.XCall)),
+                            new MySqlParameter("XName", PutNull(model.XName)),
+                            new MySqlParameter("IDCardNO", PutNull(model.IDCardNO)),
+                            new MySqlParameter("Tel", PutNull(model.Tel)),
+                            new MySqlParameter("WorkAddress", PutNull(model.WorkAddress)),
+                new MySqlParameter("id",model.id));
             return Convert.ToInt32(obj);
         }
         public StuRelationshipModel Get(Guid id)
         {
             DataTable dt = SqlHelper.ExecuteDataTable("select * from T_StuRelationship where id=@id",
-                new SqlParameter("id",id));
+                new MySqlParameter("id",id));
             if (dt.Rows.Count <= 0)
             {
                 return null;
@@ -53,10 +54,10 @@ namespace Data
             {
                 StuRelationshipModel model = new StuRelationshipModel();
                 DataRow row = dt.Rows[0];
-                model.id= (Guid)row["id"];
-                model.StuId= (Guid)row["StuId"];
-                model.Call= (string)GetNull(row["Call"]);
-                model.Name= (string)GetNull(row["Name"]);
+                model.id= new Guid(row["id"].ToString());
+                model.StuId= new Guid(row["StuId"].ToString());
+                model.XCall= (string)GetNull(row["XCall"]);
+                model.XName= (string)GetNull(row["XName"]);
                 model.IDCardNO= (string)GetNull(row["IDCardNO"]);
                 model.Tel= (string)GetNull(row["Tel"]);
                 model.WorkAddress= (string)GetNull(row["WorkAddress"]);
@@ -75,10 +76,10 @@ namespace Data
             foreach (DataRow row in dt.Rows)
             {
                 StuRelationshipModel model = new StuRelationshipModel();
-                model.id= (Guid)row["id"];
-                model.StuId= (Guid)row["StuId"];
-                model.Call= (string)GetNull(row["Call"]);
-                model.Name= (string)GetNull(row["Name"]);
+                model.id= new Guid(row["id"].ToString());
+                model.StuId= new Guid(row["StuId"].ToString());
+                model.XCall= (string)GetNull(row["XCall"]);
+                model.XName= (string)GetNull(row["XName"]);
                 model.IDCardNO= (string)GetNull(row["IDCardNO"]);
                 model.Tel= (string)GetNull(row["Tel"]);
                 model.WorkAddress= (string)GetNull(row["WorkAddress"]);

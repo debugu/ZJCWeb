@@ -16,7 +16,8 @@ namespace Data
             {
                 return null;
             }
-            else {
+            else
+            {
                 return m.Name;
             }
         }
@@ -37,6 +38,26 @@ namespace Data
             {
                 return m.id.ToString();
             }
+        }
+
+        public bool CheckUserName(string username)
+        {
+            return new StudentInfoDAL().GetByUserName(username) == null;
+        }
+
+        public IEnumerable<WanChengQingkuangModel> GetWanChengQingKuang(string className)
+        {
+            return new StudentInfoDAL().GetWanChengQingKuang(className);
+        }
+
+        public WanChengQingkuangModel GetNumberOfRelationship(string idcardno)
+        {
+            return new StudentInfoDAL().GetNumberOfRelationship(idcardno);
+        }
+
+        public int SetRelationInserted(Guid id)
+        {
+            return new StudentInfoDAL().SetRelationInserted(id);
         }
     }
 }

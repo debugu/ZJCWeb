@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>信息输入</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!--自适应页面-->
+    <script src="../Scripts/jquery-1.8.3.min.js"></script>
+    <script src="../Scripts/jquery.mobile-1.3.2.min.js"></script>
+    <link href="../css/jquery.mobile-1.3.2.min.css" rel="stylesheet" />
+    <script>
+        $(function () {
+            var stuNo = GetPara();
+            $.post("../DataASHX/GetRelationsById.ashx", { "id": stuNo }, function (data) {
+                var gs = $.parseJSON(data);
+                $("#txtJh1").html("姓名：" + gs[0].XName + "<br/>关系：" + gs[0].XCall + "<br/>身份证：" + gs[0].IDCardNO + "<br/>电话：" + gs[0].Tel);
+            });
+            $("#liGx2").hide();
+            $("#btnOk").click(function () {
+                if ($("#txtGx2").val() != "选择") {
+                    if ($("#txtNo2").val() == "" || $("#txtName2").val() == "" || $("#txtTel2").val() == "") {
+                        alert("监护人的身份证号码、姓名和电话不能为空，请检查输入。");
+                        return false;
+                    }
+                    if ($("#txtNo2").val().length != 18) {
+                        alert("监护人的身份证号码应为18位，请检查输入。");
+                        return false;
+                    }
+                }
+                if ($("#txtGx2").val() != "选择") {
+                    $.post("../DataASHX/AddStuRelationship.ashx", { "id": stuNo, "Call": $("#txtGx2").val(), "Name": $("#txtName2").val(), "IDCardNO": $("#txtNo2").val(), "Tel": $("#txtTel2").val() }, function (data) {
+                    });
+                }
+                location.href = "ShowInfo.html?id=" + stuNo;
+            });
+            $("#s2").change(function () {
+                $("#txtGx2").val($("#s2").val());
+                $("#liGx2").hide();
+                if ($("#s2").val() == "") {
+                    $("#liGx2").show();
+                }
+            });
+        });
+        function GetPara() {
+            /* 用途: 接收地直栏参数 取id=1 根据ID的值 */
+            var urlinfo = window.location.href; //获取当前页面的url
+            var len = urlinfo.length;//获取url的长度
+            var offset = urlinfo.indexOf("?");//设置参数字符串开始的位置
+            var newsidinfo = urlinfo.substr(offset, len);//取出参数字符串 这里会获得类似“id=1”这样的字符串
+            offset = urlinfo.indexOf("=");
+            newsidinfo = urlinfo.substr(offset + 1, len);
+            return newsidinfo;//得到参数值
+        }
+    </script>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header">
+            <h1>信息输入</h1>
+        </div>
+        <div data-role="content">
+            <p>已经存在一个监护人:<br /><span id="txtJh1"></span></p>
+            <ul data-role="listview">
+                <li data-role="list-divider">第二监护人</li>
+                <li>
+                    <select id="s2">
+                        <option value="选择">请选择监护人</option>
+                        <option value="父亲">父亲</option>
+                        <option value="母亲">母亲</option>
+                        <option value="祖父">祖父</option>
+                        <option value="祖母">祖母</option>
+                        <option value="外祖父">外祖父</option>
+                        <option value="外祖母">外祖母</option>
+                        <option value="">其他</option>
+                    </select>
+                </li>
+                <li id="liGx2">
+                    <input type="text" placeholder="关系" class="textbox" id="txtGx2" value="选择" />
+                </li>
+                <li>
+                    <input type="text" placeholder="监护人姓名" class="textbox" id="txtName2" />
+                </li>
+                <li>
+                    <input type="text" placeholder="监护人18位身份证号码" class="textbox" id="txtNo2" />
+                </li>
+                <li>
+                    <input type="text" placeholder="监护人手机号码或固话（加区号）" class="textbox" id="txtTel2" />
+                </li>
+            </ul>
+            <input type="button" value="确认提交" id="btnOk" />
+        </div>
+        <div data-role="footer">
+            Copyright © 海安南莫中学 All Rights Reserved.
+        </div>
+    </div>
+</body>
+</html>

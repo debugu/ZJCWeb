@@ -106,6 +106,7 @@
     <Compile Include="Model\T_TeacherInfo_Model.cs" />
     <Compile Include="Model\T_TenantInfo_Model.cs" />
     <Compile Include="Model\V_Class_Model.cs" />
+    <Compile Include="Model\WanChengQingkuangModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

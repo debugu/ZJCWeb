@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>信息采集告家长函</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!--自适应页面-->
+    <script src="../Scripts/jquery-1.8.3.min.js"></script>
+    <script src="../Scripts/jquery.mobile-1.3.2.min.js"></script>
+    <link href="../css/jquery.mobile-1.3.2.min.css" rel="stylesheet" />
+    <script>
+        $(function () {
+            $("#btnOK").click(function () {
+                location.href = "login.html";
+            });
+        })
+    </script>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header">
+            <h1>
+                信息采集告家长函
+            </h1>
+        </div>
+        <div data-role="content">
+            <p align="center"><b>关于完善学生信息采集问题的说明</b></p>
+            <p>尊敬的家长，您好！</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为严格执行国家教育部、财政部等部门关于学生信息采集的通知，学校在放寒假前已请各位家长采集过一次学生信息。可因当时学校网站的服务器故障，导致部分家长已填的子女信息，学校无法导出汇总。在此表示真诚的歉意！</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现请您用子女的身份证号码再次登录查看。如能查看到二位监护人（应该为父母）信息，就不需重新采集；只要缺少一位或二位，就请您务必将信息补全。必须保证有二位监护人的信息。</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如已采集的信息有误，请点击“修改”，填写完成后“确认”即可。</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;信息采集截止时间为3月8日。</p>
+            <p align="right">海安市南莫中学</p>
+            <p align="right">2019年3月4日</p>
+            <input type="button" value="确定" id="btnOK" />
+        </div>
+
+        <div data-role="footer">
+            Copyright © 海安南莫中学 All Rights Reserved.
+        </div>
+    </div>
+</body>
+</html>

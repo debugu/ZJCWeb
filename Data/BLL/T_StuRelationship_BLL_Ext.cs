@@ -23,5 +23,10 @@ namespace Data
         {
             return new StuRelationshipDAL().GetStuJHInfoModel();
         }
+
+        public IEnumerable<StuRelationshipModel> GetRelationsById(Guid id)
+        {
+            return new StuRelationshipDAL().GetRelationsById(id);
+        }
     }
 }

@@ -41,5 +41,25 @@ namespace Data
             }
             return list;
         }
+
+        public IEnumerable<StuRelationshipModel> GetRelationsById(Guid id)
+        {
+            DataTable dt = SqlHelper.ExecuteDataTable("select * from T_StuRelationship where StuId=@StuId",
+                new MySqlParameter("StuId", id));
+            List<StuRelationshipModel> list = new List<StuRelationshipModel>();
+            foreach (DataRow row in dt.Rows)
+            {
+                StuRelationshipModel model = new StuRelationshipModel();
+                model.id = new Guid(row["id"].ToString());
+                model.StuId = new Guid(row["StuId"].ToString());
+                model.XCall = (string)GetNull(row["XCall"]);
+                model.XName = (string)GetNull(row["XName"]);
+                model.IDCardNO = (string)GetNull(row["IDCardNO"]);
+                model.Tel = (string)GetNull(row["Tel"]);
+                model.WorkAddress = (string)GetNull(row["WorkAddress"]);
+                list.Add(model);
+            }
+            return list;
+        }
     }
 }

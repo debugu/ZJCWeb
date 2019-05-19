@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>录入成功</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!--自适应页面-->
+    <script src="../Scripts/jquery-1.8.3.min.js"></script>
+    <script src="../Scripts/jquery.mobile-1.3.2.min.js"></script>
+    <link href="../css/jquery.mobile-1.3.2.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div data-role="page">
+        <script>
+            $(function () {
+                var stuNo = GetPara();
+                $.post("../DataASHX/GetRelationsById.ashx", { "id": stuNo }, function (data) {
+                    var gs = $.parseJSON(data);
+                    $("#txtJh1").html("姓名：" + gs[0].XName + "<br/>关系：" + gs[0].XCall + "<br/>身份证：" + gs[0].IDCardNO + "<br/>电话：" + gs[0].Tel + "<br/>如果上面的信息有误，请<a data-ajax='false' href='EditInfo.html?id=" + gs[0].id + "'>点击此处</a>编辑");
+                    $("#txtJh2").html("姓名：" + gs[1].XName + "<br/>关系：" + gs[1].XCall + "<br/>身份证：" + gs[1].IDCardNO + "<br/>电话：" + gs[1].Tel + "<br/>如果上面的信息有误，请<a data-ajax='false' href='EditInfo.html?id=" + gs[1].id + "'>点击此处</a>编辑");
+                });
+                $("#btnBack").click(function () {
+                    location.href = "index.html";
+                });
+            });
+            function GetPara() {
+                /* 用途: 接收地直栏参数 取id=1 根据ID的值 */
+                var urlinfo = window.location.href; //获取当前页面的url
+                var len = urlinfo.length;//获取url的长度
+                var offset = urlinfo.indexOf("?");//设置参数字符串开始的位置
+                var newsidinfo = urlinfo.substr(offset, len);//取出参数字符串 这里会获得类似“id=1”这样的字符串
+                offset = urlinfo.indexOf("=");
+                newsidinfo = urlinfo.substr(offset + 1, len);
+                return newsidinfo;//得到参数值
+            }
+        </script>
+        <div data-role="header">
+            <h1>录入成功</h1>
+        </div>
+        <div data-role="content">
+            <p></p>
+            <p>以下为您的监护人信息，感谢您的配合。</p>
+            <p>监护人一:<br /><span id="txtJh1"></span></p>
+
+            <p>监护人二:<br /><span id="txtJh2"></span></p>
+            <p></p>
+        </div>
+        <p><input type="button" value="回到首页" id="btnBack" /></p>
+        <div data-role="footer">
+            Copyright © 海安南莫中学 All Rights Reserved.
+        </div>
+    </div>
+</body>
+</html>

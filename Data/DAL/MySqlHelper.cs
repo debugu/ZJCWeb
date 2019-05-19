@@ -10,8 +10,8 @@ namespace Data
 {
     class SqlHelper
     {
-        //public static string connstr = "server=55b091c3adbb0.sh.cdb.myqcloud.com;port=6959;User ID=cdb_outerroot;Password=g123456789;Database=StuInfo;Charset=gbk";
-        public static string connstr = "server=10.66.149.119;port=3306;User ID=root;Password=g123456789;Database=StuInfo;Charset=gbk";
+        public static string connstr = "server=55b091c3adbb0.sh.cdb.myqcloud.com;port=6959;User ID=cdb_outerroot;Password=g123456789;Database=zjc;Charset=gbk";
+        //public static string connstr = "server=10.66.149.119;port=3306;User ID=root;Password=g123456789;Database=StuInfo;Charset=gbk";
         public static int ExecuteNonQuery(string MySqlstr, params MySqlParameter[] parameter)
         {
              using (MySqlConnection conn = new MySqlConnection(connstr))

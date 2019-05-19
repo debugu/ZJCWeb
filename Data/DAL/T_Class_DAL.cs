@@ -51,7 +51,7 @@ namespace Data
                 ClassModel model = new ClassModel();
                 DataRow row = dt.Rows[0];
                 model.id= new Guid(row["id"].ToString());
-                model.TeacherId= (Guid)row["TeacherId"];
+                model.TeacherId= new Guid(row["TeacherId"].ToString());
                 model.ClassName= (string)row["ClassName"];
                 model.Year= (string)row["Year"];
                 model.Remark= (string)GetNull(row["Remark"]);
